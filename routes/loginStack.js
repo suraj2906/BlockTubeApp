@@ -5,7 +5,8 @@ import SignUp from '../screens/SignUp';
 
 const screens = {
     LogIn: {
-        screen: LogIn
+        screen: LogIn,
+        
     },
     SignUp: {
         screen: SignUp
