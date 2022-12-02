@@ -1,0 +1,14 @@
+{
+    "compilerOptions": {
+        "baseUrl": ".",
+        "paths": {
+        "@components/*": ["./UI/components/*"],
+        "@assets/*": ["./assets/*"],
+        "@core":["./UI/core"],
+        "@screens": ["./screens"],
+        "@routes": ["./routes"],
+        "@store": ["./redux"]
+        }
+    },
+    "exclude": ["node_modules", "dist"]
+}
