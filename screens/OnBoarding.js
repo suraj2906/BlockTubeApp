@@ -1,7 +1,7 @@
 import React from 'react'
 import { Text, View, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native'
 import BlockTubeLogo from '../assets/pictures/BlockTubeLogo.svg'
-import FlatButton from '../components/Button';
+import FlatButton from '@core/Button';
 import LinearGradient from 'react-native-linear-gradient';
 import MyCarousel from '../components/MyCarousel'
 import { Carousel } from 'react-native-snap-carousel';
