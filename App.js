@@ -1,5 +1,5 @@
 import React, {useState} from 'react';
-import LogIn from './screens/LogIn';
+import OnBoarding from './screens/OnBoarding';
 import SignUp from './screens/SignUp';
 // import Stack from './routes/loginStack';
 import { store } from './redux/store'
@@ -14,7 +14,7 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name = "LogIn" component = {LogIn}/>
+          <Stack.Screen name = "OnBoarding" component = {OnBoarding}/>
           <Stack.Screen name = "SignUp" component = {SignUp}/>
         </Stack.Navigator>
       </NavigationContainer>

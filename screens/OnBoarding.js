@@ -1,12 +1,27 @@
 import React from 'react'
-import { Text, View, StyleSheet, Button, TouchableOpacity } from 'react-native'
+import { Text, View, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native'
 import BlockTubeLogo from '../assets/pictures/BlockTubeLogo.svg'
 import FlatButton from '../components/Button';
 import LinearGradient from 'react-native-linear-gradient';
+import MyCarousel from '../components/MyCarousel'
+import { Carousel } from 'react-native-snap-carousel';
+import data from '../assets/data/slides'
+import { useState } from 'react';
 
 
+const _renderItem = ({item, index}) => {
+  return(
+    <View style={styles.slide}>
+      <Text style={styles.title}>{item.title}</Text>
+      <Text style={styles.description}>{item.description}</Text>
+    </View>
+  )
+}
 
-const LogIn = () => {
+
+const OnBoarding = ({ navigation }) => {
+
+  const [slideIndex, setSlideIndex] = useState(0);
   return (
     <>
       <View style = {styles.bg}>
@@ -16,7 +31,7 @@ const LogIn = () => {
           angle = {103}
           angleCenter = {{x: 0.5, y: 0.5}}
           locations={[0.3942, 0.7583]}>
-            <TouchableOpacity>
+            <TouchableOpacity onPress = {() => {navigation.navigate("SignUp")}}>
               <Text style={styles.grad1Text}>Skip All</Text>
             </TouchableOpacity>
           </LinearGradient>
@@ -32,19 +47,29 @@ const LogIn = () => {
             angle = {146.66}
             angleCenter = {{x: 0.5, y: 0.5}}
             locations={[0.3942, 0.7583]}>
-                <Text style = {[styles.grad1Text, styles.grad2Text]}>1 Of 3</Text>
+                <Text style = {[styles.grad1Text, styles.grad2Text]}>{slideIndex + 1} Of 3</Text>
             </LinearGradient>
-            
-            <Text style={styles.subtitle}>Lorem Ipsum Dolor</Text>
-            <Text style={styles.description}>There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable. </Text>
-            <View style={styles.circles}>
-              <View style={[styles.circle, styles.active]}></View> 
-              <View style={styles.circle}></View> 
-              <View style={styles.circle}></View>
+            <View style={styles.container}>
+              <Carousel
+              data={data}
+              renderItem={_renderItem}
+              sliderWidth={Dimensions.get("screen").width}
+              itemWidth={500}
+              ref={(c) => { this._carousel = c; }}
+            />
             </View>
-          </View>
+            </View>
+            
+            
+
+            <View style={styles.circles}>
+              <View style={[styles.circle, slideIndex == 0 ? styles.active : styles.circle]}></View> 
+              <View style={[styles.circle, slideIndex == 1 ? styles.active : styles.circle]}></View> 
+              <View style={[styles.circle, slideIndex == 2 ? styles.active : styles.circle]}></View>
+            </View>
+          
         </View>
-        <FlatButton title = "Continue"/>
+        <FlatButton title = {slideIndex == 2 ? "Continue" : "Next"} onPress = {() => {slideIndex == 2 ? navigation.navigate('SignUp') : this._carousel.snapToNext(); setSlideIndex(this._carousel.currentIndex);}}/>
       </View>
 
 
@@ -57,8 +82,10 @@ const styles = StyleSheet.create({
     backgroundColor: "black",
     width: "100%",
     height: "100%",
-    padding: 20,
+    padding: "5%",
   },
+
+
 
   normalText: {
     color: "white",
@@ -71,6 +98,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Kanit-Bold",
     fontSize: 48,
+   
   },
 
   logo: {
@@ -98,6 +126,7 @@ const styles = StyleSheet.create({
   wc: {
     alignItems: "flex-start",
     marginTop: "25%",
+    height: "35%"
   },
 
 
@@ -132,6 +161,26 @@ const styles = StyleSheet.create({
     fontSize: 12,
   },
 
+  title: {
+    color: "white",
+    fontFamily: "Kanit-ExtraLight",
+    fontSize: 24,  
+    marginTop: "8%"
+  },
+  description: {
+    color: "white",
+    fontFamily: "Kanit-ExtraLight",
+    fontSize: 14,
+    marginTop: "5%"
+  },
+  container: {
+    height: "100%"
+  },
+  slide: {
+    paddingHorizontal: "5%",
+    
+  },
+
 
   grad2: {
     alignSelf: "flex-start",
@@ -154,7 +203,7 @@ const styles = StyleSheet.create({
   },
 
   circles: {
-    marginTop: "5%",
+    marginTop: "10%",
     display: "flex",
     flexDirection: "row",
     alignItems: "center",
@@ -164,4 +213,4 @@ const styles = StyleSheet.create({
 
 })
 
-export default LogIn
+export default OnBoarding
