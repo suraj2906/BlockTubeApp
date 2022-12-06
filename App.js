@@ -26,6 +26,7 @@ const App = () => {
           <Stack.Screen name = "SignUp" component = {SignUp}/>
         </Stack.Navigator> */}
         <Drawer.Navigator screenOptions={{
+          headerShown: false,
           drawerStyle:{
             backgroundColor: "#353535"
           }
