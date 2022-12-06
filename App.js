@@ -10,34 +10,13 @@ import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
 import { createDrawerNavigator } from '@react-navigation/drawer';
-import { DrawerContentScrollView, DrawerItem } from "@react-navigation/drawer";
-import MaterialCommunityIcons from 'react-native-vector-icons/dist/MaterialCommunityIcons'
-import BlockTubeLogo from './assets/pictures/BlockTubeLogo.svg'
+
+import CustomDrawerContent from '@components/drawer';
 
 
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 
-function CustomDrawerContent(props) {
-  const width = useWindowDimensions().width * 0.3;
-
-  return (
-    <DrawerContentScrollView {...props}>
-      <View style={{marginTop: 25, marginLeft: 10, marginBottom: 31, flex: 1, flexDirection: "row", alignItems:"center"}}>
-        <BlockTubeLogo width={34} height={30} />
-        <Text style={{fontFamily: "Kanit-SemiBold", fontSize: 32, color:"#f4f4f4", marginLeft: 10}}>BLOCKTUBE</Text>
-      </View>
-      <DrawerItem 
-        style={{width: "90%", height: 47, paddingLeft: 10, backgroundColor: "#515151", borderRadius: 10, borderWidth: 1, borderColor: "#616161", marginBottom: 2}} 
-        label="Home"
-        labelStyle={{color: "#c3c3c3", fontFamily:"Kanit-Regular", left: -25, marginTop: 1}}
-        icon={()=><MaterialCommunityIcons name="home" color="#d6d6d6" size={23}/>}
-      >
-
-      </DrawerItem>
-    </DrawerContentScrollView>
-  );
-}
 const App = () => {
   return (
     <Provider store={store}>
