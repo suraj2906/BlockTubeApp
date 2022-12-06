@@ -1,12 +1,8 @@
 import 'react-native-gesture-handler';
 import React, {useState} from 'react';
-<<<<<<< Updated upstream
 import OnBoarding from './screens/OnBoarding';
-import SignUp from './screens/SignUp';
-=======
 import LogIn from '@screens/Login';
 import SignUp from '@screens/Signup';
->>>>>>> Stashed changes
 // import Stack from './routes/loginStack';
 import { View, Text, useWindowDimensions, StyleSheet } from 'react-native';
 import { store } from '@store/store'
@@ -46,13 +42,8 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-<<<<<<< Updated upstream
-        <Stack.Navigator screenOptions={{headerShown: false}}>
-          <Stack.Screen name = "OnBoarding" component = {OnBoarding}/>
-=======
         {/* <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name = "LogIn" component = {LogIn}/>
->>>>>>> Stashed changes
           <Stack.Screen name = "SignUp" component = {SignUp}/>
         </Stack.Navigator> */}
         <Drawer.Navigator screenOptions={{
