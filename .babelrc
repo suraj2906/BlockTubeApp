@@ -24,6 +24,7 @@
             "@store": "./redux"
           }
         }
-      ]
+      ],
+      "react-native-reanimated/plugin",
     ]
   }
