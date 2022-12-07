@@ -1,5 +1,5 @@
 import React from 'react'
-import { Text, View, StyleSheet, Button, TouchableOpacity, Dimensions } from 'react-native'
+import { Text, View, StyleSheet, Button, TouchableOpacity, Dimensions, ImageBackground } from 'react-native'
 import BlockTubeLogo from '../assets/pictures/BlockTubeLogo.svg'
 import FlatButton from '@core/Button';
 import LinearGradient from 'react-native-linear-gradient';
@@ -7,6 +7,8 @@ import MyCarousel from '../components/MyCarousel'
 import { Carousel } from 'react-native-snap-carousel';
 import data from '../assets/data/slides'
 import { useState } from 'react';
+import NumGradient from '../components/NumGradient'
+import Blur from '../assets/pictures/Blur.png'
 
 
 const _renderItem = ({item, index}) => {
@@ -22,9 +24,15 @@ const _renderItem = ({item, index}) => {
 const OnBoarding = ({ navigation }) => {
 
   const [slideIndex, setSlideIndex] = useState(0);
+  const screenWidth = Dimensions.get("screen").width;
+  const screenHeight = Dimensions.get("screen").height;
+
   return (
     <>
-      <View style = {styles.bg}>
+    
+      <View style = {styles.black}>
+      <ImageBackground source = {Blur} resizeMode = "cover"  style = {styles.bgImage}>
+        <View style={styles.paddedBg}>
         <View>
           <LinearGradient style={styles.grad1} colors={['#00a3ff75', '#11ddc475']}  
           useAngle= {true}
@@ -42,13 +50,7 @@ const OnBoarding = ({ navigation }) => {
         <View style={styles.logo}>
           <BlockTubeLogo style={styles.image}/>
           <View style={styles.wc}>
-            <LinearGradient style={[styles.grad1, styles.grad2]} colors={['#1950b9d9', '#1a4dac75']}  
-            useAngle= {true}
-            angle = {146.66}
-            angleCenter = {{x: 0.5, y: 0.5}}
-            locations={[0.3942, 0.7583]}>
-                <Text style = {[styles.grad1Text, styles.grad2Text]}>{slideIndex + 1} Of 3</Text>
-            </LinearGradient>
+            <NumGradient leftNum = {slideIndex + 1} rightNum = {3} />
             <View style={styles.container}>
               <Carousel
               data={data}
@@ -70,22 +72,29 @@ const OnBoarding = ({ navigation }) => {
           
         </View>
         <FlatButton title = {slideIndex == 2 ? "Continue" : "Next"} onPress = {() => {slideIndex == 2 ? navigation.navigate('SignUp') : this._carousel.snapToNext(); setSlideIndex(this._carousel.currentIndex);}}/>
+        </View>
+        </ImageBackground>     
+           
       </View>
-
 
     </>
   )
 }
 
 const styles = StyleSheet.create({
-  bg: {
+  black: {
     backgroundColor: "black",
     width: "100%",
     height: "100%",
-    padding: "5%",
   },
 
+  paddedBg: {
+    width: "100%",
+    height: "100%",
+    padding: "5%"
+  },
 
+  
 
   normalText: {
     color: "white",
