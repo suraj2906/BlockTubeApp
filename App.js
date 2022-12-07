@@ -1,21 +1,21 @@
-import 'react-native-gesture-handler';
+// import 'react-native-gesture-handler';
 import React, {useState} from 'react';
 import OnBoarding from './screens/OnBoarding';
-import LogIn from '@screens/Login';
-import SignUp from '@screens/Signup';
+import LogIn from './screens/Login';
+import Signup from './screens/Signup';
 // import Stack from './routes/loginStack';
 import { View, Text, useWindowDimensions, StyleSheet } from 'react-native';
 import { store } from '@store/store'
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
-import { createDrawerNavigator } from '@react-navigation/drawer';
+// import { createDrawerNavigator } from '@react-navigation/drawer';
 
-import CustomDrawerContent from '@components/drawer';
+// import CustomDrawerContent from '@components/drawer';
 
 
 const Stack = createNativeStackNavigator();
-const Drawer = createDrawerNavigator();
+// const Drawer = createDrawerNavigator();
 
 const App = () => {
   return (
@@ -29,7 +29,7 @@ const App = () => {
           <Stack.Screen name = "LogIn" component = {LogIn}/>
           <Stack.Screen name = "SignUp" component = {SignUp}/>
         </Stack.Navigator> */}
-        <Drawer.Navigator screenOptions={{
+        {/* <Drawer.Navigator screenOptions={{
           headerShown: false,
           drawerStyle:{
             backgroundColor: "#353535"
@@ -37,8 +37,8 @@ const App = () => {
         }}
          initialRouteName="Home" drawerContent={(props)=> <CustomDrawerContent {...props} />}>
           <Drawer.Screen name="Home" component={LogIn} />
-          <Drawer.Screen name="Notifications" component={SignUp} />
-      </Drawer.Navigator>
+          <Drawer.Screen name="Notifications" component={Signup} />
+      </Drawer.Navigator> */}
       </NavigationContainer>
     </Provider>
   )

@@ -3,11 +3,11 @@ import { Text, View, StyleSheet, Button, TouchableOpacity, Dimensions, ImageBack
 import BlockTubeLogo from '../assets/pictures/BlockTubeLogo.svg'
 import FlatButton from '@core/Button';
 import LinearGradient from 'react-native-linear-gradient';
-import MyCarousel from '../components/MyCarousel'
+import MyCarousel from '../../components/MyCarousel'
 import { Carousel } from 'react-native-snap-carousel';
-import data from '../assets/data/slides'
+import data from '../../assets/data/slides'
 import { useState } from 'react';
-import NumGradient from '../components/NumGradient'
+import NumGradient from '../../components/NumGradient'
 import Blur from '../assets/pictures/Blur.png'
 
 
