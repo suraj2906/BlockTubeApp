@@ -5,6 +5,9 @@ import { useState } from 'react'
 import NumGradient from '../../components/NumGradient'
 import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
+import DateTimePickerModal from "react-native-modal-datetime-picker";
+import FlatButton from 'UI/core/Button'
+
 
 const Signup = () => {
 
@@ -16,6 +19,37 @@ const Signup = () => {
 
   const windowHeight = Dimensions.get("screen").height;
   const formInputHeight = windowHeight*0.5*0.1;
+
+  const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
+  const [date, setDate] = useState(null);
+
+  const showDatePicker = () => {
+    setDatePickerVisibility(true);
+  };
+
+  const hideDatePicker = () => {
+    setDatePickerVisibility(false);
+  };
+
+  const FormatDate = (date) => {
+    let dateString =
+      date.getDate() +
+      '-' +
+      (date.getMonth() + 1) +
+      '-' +
+      date.getFullYear();
+
+      return dateString;
+  }
+
+  const handleConfirm = (date) => {
+    console.warn("A date has been picked: ", date);
+    setDate(FormatDate(date))
+    hideDatePicker();
+  };
+
+  
+
 
   return (
     <View style={styles.bg}>
@@ -68,10 +102,18 @@ const Signup = () => {
           </View>
           <View style = {styles.dobNSex}>
           <View style = {styles.headerWithInput}>
+            
             <Text style={styles.formText}>DOB</Text>
-            <View style = {[styles.textInputWithIcon, formInputHeight]} width = {"80%"}>
-
-            <Icon name = "ios-calendar" size={22} color = "#666666" style = {styles.icon}/>
+            <View style = {[styles.textInputWithIcon, formInputHeight]} width = {"110%"}>
+            
+            <Icon name = "ios-calendar" size={22} color = "#666666" style = {styles.icon} onPress={showDatePicker} />
+            <Text style={styles.dateText}>{date? date: ""}</Text>
+            <DateTimePickerModal
+              isVisible={isDatePickerVisible}
+              mode="date"
+              onConfirm={handleConfirm}
+              onCancel={hideDatePicker}
+            />
             
             </View>
             
@@ -112,6 +154,9 @@ const styles = StyleSheet.create({
   dateText: {
     fontFamily: "Kanit-Light",
     color: "white",
+    alignItems: "center",
+    justifyContent: "center",
+    lineHeight: 38
   },
 
   input: {

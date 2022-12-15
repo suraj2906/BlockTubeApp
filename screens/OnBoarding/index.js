@@ -1,6 +1,6 @@
 import React from 'react'
 import { Text, View, StyleSheet, Button, TouchableOpacity, Dimensions, ImageBackground } from 'react-native'
-import BlockTubeLogo from '../assets/pictures/BlockTubeLogo.svg'
+import BlockTubeLogo from '../../assets/pictures/BlockTubeLogo.svg'
 import FlatButton from '@core/Button';
 import LinearGradient from 'react-native-linear-gradient';
 import MyCarousel from '../../components/MyCarousel'
@@ -8,7 +8,7 @@ import { Carousel } from 'react-native-snap-carousel';
 import data from '../../assets/data/slides'
 import { useState } from 'react';
 import NumGradient from '../../components/NumGradient'
-import Blur from '../assets/pictures/Blur.png'
+import Blur from '../../assets/pictures/Blur.png'
 
 
 const _renderItem = ({item, index}) => {
@@ -31,7 +31,11 @@ const OnBoarding = ({ navigation }) => {
     <>
     
       <View style = {styles.black}>
-      <ImageBackground source = {Blur} resizeMode = "cover"  style = {styles.bgImage}>
+      <ImageBackground source = {Blur} resizeMode = "stretch"  style = {styles.bgImage} imageStyle={{
+    resizeMode: "cover",
+    height: "100%", // the image height
+    top: "-22%"
+  }}>
         <View style={styles.paddedBg}>
         <View>
           <LinearGradient style={styles.grad1} colors={['#00a3ff75', '#11ddc475']}  
@@ -218,6 +222,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%"
+  },
+
+  bgImage: {
+    // position: "absolute",
+    // top: "-10%"
   }
 
 })
