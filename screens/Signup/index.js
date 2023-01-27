@@ -7,9 +7,10 @@ import Icon from 'react-native-vector-icons/Ionicons'
 import { TouchableOpacity } from 'react-native-gesture-handler'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import FlatButton from 'UI/core/Button'
+import { SelectList } from 'react-native-dropdown-select-list'
 
 
-const Signup = () => {
+const Signup = ({navigation}) => {
 
   const [form, setForm] = useState(0);
   const [email, onChangeEmail] = useState(null);
@@ -22,6 +23,16 @@ const Signup = () => {
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState(null);
+
+  const genderData = [
+    {key: '1', value: 'Male'},
+    {key: '2', value: 'Female'},
+    {key: '3', value: 'Non-Binary'},
+    {key: '4', value: 'Other'},
+  ]
+
+  const [selected, setSelected] = React.useState("");
+
 
   const showDatePicker = () => {
     setDatePickerVisibility(true);
@@ -43,7 +54,7 @@ const Signup = () => {
   }
 
   const handleConfirm = (date) => {
-    console.warn("A date has been picked: ", date);
+    
     setDate(FormatDate(date))
     hideDatePicker();
   };
@@ -107,7 +118,7 @@ const Signup = () => {
             <View style = {[styles.textInputWithIcon, formInputHeight]} width = {"110%"}>
             
             <Icon name = "ios-calendar" size={22} color = "#666666" style = {styles.icon} onPress={showDatePicker} />
-            <Text style={styles.dateText}>{date? date: ""}</Text>
+            <Text style={styles.dateText} onPress={showDatePicker}>{date? date: "Select Date"}</Text>
             <DateTimePickerModal
               isVisible={isDatePickerVisible}
               mode="date"
@@ -118,8 +129,34 @@ const Signup = () => {
             </View>
             
             </View>
+
+            <View style = {styles.sex} width = {"55%"}>
+            
+            <Text style={styles.formText}>Gender</Text>
+            <View style = {[styles.textInputWithIcon, formInputHeight]} >
+            
+            <Icon name = "man" size={22} color = "#666666" style = {styles.icon} onPress={showDatePicker} />
+            
+            <SelectList 
+              setSelected={(val) => setSelected(val)} 
+              data={genderData} 
+              save="value"
+              borderWidth="0"
+              placeholder='Select Gender'
+              search = {false}
+              boxStyles = {{borderWidth: 0}}
+              dropdownStyles = {{borderWidth: 0}}
+              inputStyles = {{color: "white"}}
+              arrowicon = ""
+            />
+            
+            </View>
+            
+            </View>
           </View>
+          <FlatButton title = "Move Forward" style = {styles.button} onPress = {() => {navigation.navigate("VideoPage")}}/>
           </View>
+         
         </View>
   
       </View>
@@ -206,6 +243,16 @@ const styles = StyleSheet.create({
   dobNSex: {
     display: "flex",
     flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  sex: {
+    marginTop: "-1%"
+  },
+
+  button: {
+    marginTop: "5%",
+    width: "100%"
   }
 
 })

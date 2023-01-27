@@ -10,6 +10,9 @@ const screens = {
     },
     SignUp: {
         screen: SignUp
+    },
+    SecondSignUp: {
+        screen: SecondSignUp
     }
 }
 

@@ -3,6 +3,8 @@ import React, {useState} from 'react';
 import OnBoarding from './screens/OnBoarding';
 import LogIn from './screens/Login';
 import Signup from './screens/Signup';
+import SecondSignUp from './screens/SecondSignUp'
+import VideoPage from './screens/VideoPage'
 // import Stack from './routes/loginStack';
 import { View, Text, useWindowDimensions, StyleSheet } from 'react-native';
 import { store } from '@store/store'
@@ -22,8 +24,12 @@ const App = () => {
     <Provider store={store}>
       <NavigationContainer>
         <Stack.Navigator screenOptions={{headerShown: false}}>
+          
           <Stack.Screen name = "OnBoarding" component = {OnBoarding}/>
+          
           <Stack.Screen name = "SignUp" component = {Signup}/>
+          <Stack.Screen name = "VideoPage" component = {VideoPage}/>
+          <Stack.Screen name = "SecondSignUp" component = {SecondSignUp}/>
         </Stack.Navigator>
         {/* <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name = "LogIn" component = {LogIn}/>
