@@ -11,6 +11,7 @@ import { store } from '@store/store'
 import { Provider } from 'react-redux'
 import { NavigationContainer } from '@react-navigation/native';
 import { createNativeStackNavigator } from '@react-navigation/native-stack';
+import Subscription from 'screens/Subscriptions';
 // import { createDrawerNavigator } from '@react-navigation/drawer';
 
 // import CustomDrawerContent from '@components/drawer';
@@ -23,13 +24,14 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}}>
+        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Subscriptions">
           
           <Stack.Screen name = "OnBoarding" component = {OnBoarding}/>
           
           <Stack.Screen name = "SignUp" component = {Signup}/>
           <Stack.Screen name = "VideoPage" component = {VideoPage}/>
           <Stack.Screen name = "SecondSignUp" component = {SecondSignUp}/>
+          <Stack.Screen name = "Subscriptions" component = {Subscription}/>
         </Stack.Navigator>
         {/* <Stack.Navigator screenOptions={{headerShown: false}}>
           <Stack.Screen name = "LogIn" component = {LogIn}/>
