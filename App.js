@@ -24,7 +24,7 @@ const App = () => {
   return (
     <Provider store={store}>
       <NavigationContainer>
-        <Stack.Navigator screenOptions={{headerShown: false}} initialRouteName="Subscriptions">
+        <Stack.Navigator screenOptions={{headerShown: false}}>
           
           <Stack.Screen name = "OnBoarding" component = {OnBoarding}/>
           

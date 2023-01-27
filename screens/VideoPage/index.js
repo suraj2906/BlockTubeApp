@@ -7,6 +7,9 @@ const VideoPage = () => {
   return (
     <View style={styles.main}>
         <VideoComponent/>
+        <VideoComponent/>
+        <VideoComponent/>
+        {/* <VideoComponent/> */}
       <BottomNavigation/>
     </View>
   )
@@ -16,7 +19,7 @@ export default VideoPage
 
 const styles = StyleSheet.create({
     main: {
-        backgroundColor: "black",
+        backgroundColor: "#0c0c0c",
         width: "100%",
         height: "100%",
         padding: "5%"
