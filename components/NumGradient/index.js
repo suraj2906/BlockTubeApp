@@ -35,7 +35,7 @@ const styles = StyleSheet.create({
 
     gradText: {
         fontSize: 12,
-        fontFamily: "Kanit-ExtraLight",
-        fontWeight: "275",
+        fontFamily: "Kanit-Light",
+        color: "#ccc"
       },
 })
