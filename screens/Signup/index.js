@@ -184,15 +184,16 @@ const styles = StyleSheet.create({
   },
 
   dateText: {
-    fontFamily: "Kanit-Light",
-    color: "white",
+    fontFamily: "Kanit-SemiBold",
+    color: "#afafaf",
     alignItems: "center",
     justifyContent: "center",
     lineHeight: 38
   },
 
   input: {
-    width: "100%"
+    width: "100%",
+    color: "#bbb"
   },
   form: {
     width: "100%",
@@ -210,19 +211,20 @@ const styles = StyleSheet.create({
   textInputWithIcon: {
     display: "flex",
     flexDirection: "row",
+    alignItems:"center",
     backgroundColor: "#262626",
     marginTop: "1%",
     width: "100%",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#444444",
-
   },
 
   formText: {
     fontFamily: "Kanit-Bold",
     fontSize: 16,
-    marginTop: "4%"
+    marginTop: "4%",
+    color: "#afafaf"
   },
 
   headerWithInput: {
