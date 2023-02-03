@@ -111,6 +111,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontFamily: "Kanit-Bold",
     fontSize: 48,
+    marginTop: -10,
    
   },
 

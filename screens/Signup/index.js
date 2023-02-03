@@ -8,9 +8,10 @@ import { TouchableOpacity } from 'react-native-gesture-handler'
 import DateTimePickerModal from "react-native-modal-datetime-picker";
 import FlatButton from 'UI/core/Button'
 import { SelectList } from 'react-native-dropdown-select-list'
+import DropDownPicker from 'react-native-dropdown-picker';
+import Input from '../../UI/core/Input'
 
-
-const Signup = ({navigation}) => {
+const Signup = ({ navigation }) => {
 
   const [form, setForm] = useState(0);
   const [email, onChangeEmail] = useState(null);
@@ -19,16 +20,25 @@ const Signup = ({navigation}) => {
   const [datePicker, setDatePicker] = useState(0)
 
   const windowHeight = Dimensions.get("screen").height;
-  const formInputHeight = windowHeight*0.5*0.1;
+  const formInputHeight = windowHeight * 0.5 * 0.1;
 
   const [isDatePickerVisible, setDatePickerVisibility] = useState(false);
   const [date, setDate] = useState(null);
 
+  const [open, setOpen] = useState(false);
+  const [value, setValue] = useState(null);
+  const [items, setItems] = useState([
+    { label: 'Male', value: 'male' },
+    { label: 'Female', value: 'female' },
+    { label: 'Non-Binary', value: 'nonBinary' },
+    { label: 'Other', value: 'other' }
+  ]);
+
   const genderData = [
-    {key: '1', value: 'Male'},
-    {key: '2', value: 'Female'},
-    {key: '3', value: 'Non-Binary'},
-    {key: '4', value: 'Other'},
+    { key: '1', value: 'Male' },
+    { key: '2', value: 'Female' },
+    { key: '3', value: 'Non-Binary' },
+    { key: '4', value: 'Other' },
   ]
 
   const [selected, setSelected] = React.useState("");
@@ -50,94 +60,59 @@ const Signup = ({navigation}) => {
       '-' +
       date.getFullYear();
 
-      return dateString;
+    return dateString;
   }
 
   const handleConfirm = (date) => {
-    
+
     setDate(FormatDate(date))
     hideDatePicker();
   };
 
-  
+
 
 
   return (
     <View style={styles.bg}>
-     
-      <View style = {styles.container}>
-        <BlockTubeLogo style={styles.image} width = {157} height = {142}/>
-        <Text style = {styles.headText}>Create Account</Text>
-        <NumGradient leftNum = {form + 1} rightNum = {2} />
-        <View style = {[styles.form, windowHeight*0.5]}>
-          <View style = {styles.headerWithInput}>
-          <Text style={styles.formText}>Email Address</Text>
+
+      <View style={styles.container}>
+        <BlockTubeLogo style={styles.image} width={157} height={142} />
+        <Text style={styles.headText}>Create Account</Text>
+        <NumGradient leftNum={form + 1} rightNum={2} />
+        <View style={[styles.form, windowHeight * 0.5]}>
           
-            <View style = {[styles.textInputWithIcon]} height = {formInputHeight}>
-            <Icon name = "ios-mail" size={22} color = "#666666" style = {styles.icon}/> 
-              <TextInput
-                style={[styles.input]}
-                height = {formInputHeight}
-                onChangeText={onChangeEmail}
-                value={email}
-              />
-            </View>
-          </View>
+          <Input onChange = {onChangeEmail} icon = {'ios-mail'} value={email} text="Email Address"/>
+          <Input onChange={onChangePass} icon="ios-lock-closed" value={pass} text="Password" password={true}/>
+          <Input onChange={onChangeConPass} icon="ios-lock-closed" value={conPass} text="Confirm Password" password={true}/>
 
-          <View style = {styles.headerWithInput}>
-            <Text style={styles.formText}>Password</Text>
-            <View style = {[styles.textInputWithIcon, formInputHeight]}>
-            <Icon name = "ios-lock-closed" size={22} color = "#666666" style = {styles.icon}/> 
-              <TextInput
-                style={styles.input}
-                onChangeText={onChangePass}
-                value={pass}
-                height = {formInputHeight}
-                secureTextEntry={true}
-              />
-            </View>
-          </View>
+          <View style={styles.dobNSex}>
+            <View style={styles.headerWithInput}>
 
-          <View style = {styles.headerWithInput}>
-            <Text style={styles.formText}>Confirm Password</Text>
-            <View style = {[styles.textInputWithIcon, formInputHeight]}>
-            <Icon name = "ios-lock-closed" size={22} color = "#666666" style = {styles.icon}/>
-              <TextInput
-                style={[styles.input, formInputHeight]}
-                onChangeText={onChangeConPass}
-                value={conPass}
-                height = {formInputHeight}
-                secureTextEntry={true}
-              />
-            </View>
-          </View>
-          <View style = {styles.dobNSex}>
-          <View style = {styles.headerWithInput}>
-            
-            <Text style={styles.formText}>DOB</Text>
-            <View style = {[styles.textInputWithIcon, formInputHeight]} width = {"110%"}>
-            
-            <Icon name = "ios-calendar" size={22} color = "#666666" style = {styles.icon} onPress={showDatePicker} />
-            <Text style={styles.dateText} onPress={showDatePicker}>{date? date: "Select Date"}</Text>
-            <DateTimePickerModal
-              isVisible={isDatePickerVisible}
-              mode="date"
-              onConfirm={handleConfirm}
-              onCancel={hideDatePicker}
-            />
-            
-            </View>
-            
+              <Text style={styles.formText}>DOB</Text>
+              <View style={[styles.textInputWithIcon, formInputHeight]} width={"110%"}>
+
+                <Icon name="ios-calendar" size={22} color="#666666" style={styles.icon} onPress={showDatePicker} />
+                <Text style={styles.dateText} onPress={showDatePicker}>{date ? date : "Select Date"}</Text>
+                <DateTimePickerModal
+                  isVisible={isDatePickerVisible}
+                  mode="date"
+                  onConfirm={handleConfirm}
+                  onCancel={hideDatePicker}
+                />
+
+              </View>
+
             </View>
 
-            <View style = {styles.sex} width = {"55%"}>
-            
-            <Text style={styles.formText}>Gender</Text>
-            <View style = {[styles.textInputWithIcon, formInputHeight]} >
-            
-            <Icon name = "man" size={22} color = "#666666" style = {styles.icon} onPress={showDatePicker} />
-            
-            <SelectList 
+            <View style={styles.sex} width={"55%"}>
+
+              <Text style={styles.formText}>Gender</Text>
+              <View style={[styles.textInputWithIcon, formInputHeight]} >
+
+                <Icon name="man" size={22} color="#666666" style={styles.icon} onPress={showDatePicker} />
+
+                {/* <SelectList 
+              maxHeight={100}
               setSelected={(val) => setSelected(val)} 
               data={genderData} 
               save="value"
@@ -148,24 +123,44 @@ const Signup = ({navigation}) => {
               dropdownStyles = {{borderWidth: 0}}
               inputStyles = {{color: "white"}}
               arrowicon = ""
-            />
-            
-            </View>
-            
+            /> */}
+
+                <DropDownPicker
+                  open={open}
+                  value={value}
+                  items={items}
+                  setOpen={setOpen}
+                  setValue={setValue}
+                  setItems={setItems}
+                  style={styles.genderDrop}
+                  placeholder="Select Sex"
+                  textStyle={styles.dateText}
+                  dropDownContainerStyle={styles.genderDrop}
+                />
+
+              </View>
+
             </View>
           </View>
-          <FlatButton title = "Move Forward" style = {styles.button} onPress = {() => {navigation.navigate("VideoPage")}}/>
-          </View>
-         
+          <FlatButton title="Move Forward" style={styles.button} onPress={() => { navigation.navigate("VideoPage") }} />
         </View>
-  
+
       </View>
+
+    </View>
   )
 }
 
 export default Signup
 
 const styles = StyleSheet.create({
+
+  genderDrop: {
+    backgroundColor: "#262626",
+    borderWidth: 0,
+    width: "77%",
+    
+  },
 
   bg: {
     backgroundColor: "black",
@@ -205,7 +200,7 @@ const styles = StyleSheet.create({
   },
 
   calActive: {
-   display: "flex",
+    display: "flex",
   },
 
   calInactive: {
@@ -217,12 +212,12 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     backgroundColor: "#262626",
     marginTop: "1%",
-    width: "100%", 
+    width: "100%",
     borderRadius: 10,
     borderWidth: 1,
     borderColor: "#444444",
-    
-  },  
+
+  },
 
   formText: {
     fontFamily: "Kanit-Bold",
@@ -231,13 +226,13 @@ const styles = StyleSheet.create({
   },
 
   headerWithInput: {
-    
+
   },
 
   icon: {
     color: "#666666",
     padding: 10
-    
+
   },
 
   dobNSex: {
@@ -252,7 +247,7 @@ const styles = StyleSheet.create({
 
   button: {
     marginTop: "5%",
-    width: "100%"
+    width: "100%",
   }
 
 })
